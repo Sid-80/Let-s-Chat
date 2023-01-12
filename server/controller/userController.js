@@ -57,3 +57,14 @@ module.exports.login = async (req,res,next) => {
         next(e);
     }
 };
+
+module.exports.getallUsers = async (req,res,next) => {
+    try {
+        const users = await User.find({_id:{$ne:req.params.id}}).select([
+            "email","username","AvatarImage","_id"
+        ]);
+        return res.json(users);
+    } catch (e) {
+        next(e);
+    }
+};

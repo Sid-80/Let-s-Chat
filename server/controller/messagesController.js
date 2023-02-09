@@ -22,6 +22,7 @@ module.exports.addMessage = async (req,res,next) =>{
 module.exports.getMessage = async (req,res,next) =>{
     try {
         const {from,to} = req.body;
+        console.log(from);
         const messages = await messageModel.find({
             users:{
                 $all:[from,to]
@@ -34,6 +35,7 @@ module.exports.getMessage = async (req,res,next) =>{
                 message : msg.message.text,
             };
         });
+        console.log(projectedMessages);
         res.json(projectedMessages);
     } catch (ex) {
         next(ex);

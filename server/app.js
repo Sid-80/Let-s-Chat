@@ -18,14 +18,13 @@ mongoose.connect(process.env.MONGO_URL,{
     useUnifiedTopology:true
 })
 .then(()=>{
-    console.log("DB Connected !!");
 })
 .catch((err)=>{
     console.log(err);
 });
 
 const server = app.listen(process.env.PORT,()=>{
-    console.log("On port 3000");
+    
 });
 
 const io = socket(server,{

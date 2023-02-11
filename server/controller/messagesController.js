@@ -2,9 +2,7 @@ const messageModel = require("../model/messageModel");
 
 module.exports.addMessage = async (req,res,next) =>{
     try {
-        console.log(req.body);
         const{from,to,message} = req.body;
-        console.log(message);
         const data = await messageModel.create({
             message:{text:message},
             users:[from,to],
@@ -22,7 +20,6 @@ module.exports.addMessage = async (req,res,next) =>{
 module.exports.getMessage = async (req,res,next) =>{
     try {
         const {from,to} = req.body;
-        console.log(from);
         const messages = await messageModel.find({
             users:{
                 $all:[from,to]
@@ -35,7 +32,6 @@ module.exports.getMessage = async (req,res,next) =>{
                 message : msg.message.text,
             };
         });
-        console.log(projectedMessages);
         res.json(projectedMessages);
     } catch (ex) {
         next(ex);
